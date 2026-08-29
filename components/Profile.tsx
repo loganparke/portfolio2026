@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 
 export function Profile() {
   return (
@@ -7,7 +8,7 @@ export function Profile() {
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
           <div className="relative w-[120px] h-[145px] md:w-[160px] md:h-[190px] overflow-hidden rounded-card border border-hairline bg-hairline flex-shrink-0">
             <Image
-              src="/images/logan.png"
+              src={withBasePath("/images/logan.png")}
               alt="Logan Parke"
               fill
               sizes="(min-width: 768px) 160px, 120px"

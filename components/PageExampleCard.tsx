@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 
 interface PageExampleCardProps {
@@ -11,10 +12,12 @@ interface PageExampleCardProps {
 }
 
 export function PageExampleCard({ title, image }: PageExampleCardProps) {
+  const imageSrc = withBasePath(image.src);
+
   return (
     <ScrollFadeIn>
       <a
-        href={image.src}
+        href={imageSrc}
         target="_blank"
         rel="noreferrer"
         aria-label={`View the full ${title} page`}
@@ -28,7 +31,7 @@ export function PageExampleCard({ title, image }: PageExampleCardProps) {
           </div>
           <div className="overflow-hidden bg-white">
             <Image
-              src={image.src}
+              src={imageSrc}
               alt={`${title} page preview`}
               width={image.width}
               height={image.height}

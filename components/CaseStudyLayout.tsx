@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import type { CaseStudyMeta } from "@/lib/getCaseStudies";
 
 interface CaseStudyLayoutProps {
@@ -37,7 +38,7 @@ export function CaseStudyLayout({ meta, children }: CaseStudyLayoutProps) {
             style={{ backgroundColor: meta.cover.background }}
           >
             <Image
-              src={meta.cover.src}
+              src={withBasePath(meta.cover.src)}
               alt={`${meta.title} product preview`}
               fill
               sizes="(min-width: 1024px) 896px, calc(100vw - 48px)"

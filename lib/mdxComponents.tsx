@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
+import { withBasePath } from "./basePath";
 
 export const mdxComponents: MDXComponents = {
   h2: (props) => (
@@ -61,7 +62,7 @@ export const mdxComponents: MDXComponents = {
     if (!src) return null;
     return (
       <Image
-        src={src}
+        src={withBasePath(src)}
         alt={alt ?? ""}
         width={width ?? 960}
         height={height ?? 540}

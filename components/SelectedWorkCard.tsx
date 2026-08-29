@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 
 interface SelectedWorkCardProps {
@@ -29,7 +30,7 @@ export function SelectedWorkCard({
       >
         <article className="min-h-44 h-full flex items-center justify-center border border-hairline rounded-card bg-white p-container-pad-mobile md:p-container-pad transition-all duration-200 group-hover:scale-[1.01] group-hover:shadow-lg">
           <Image
-            src={logo.src}
+            src={withBasePath(logo.src)}
             alt={`${name} logo`}
             width={logo.width}
             height={logo.height}

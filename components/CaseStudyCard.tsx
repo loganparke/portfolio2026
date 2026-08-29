@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { withBasePath } from "@/lib/basePath";
 import type { CaseStudyMeta } from "@/lib/getCaseStudies";
 
 export function CaseStudyCard({ study }: { study: CaseStudyMeta }) {
@@ -14,7 +15,7 @@ export function CaseStudyCard({ study }: { study: CaseStudyMeta }) {
               style={{ backgroundColor: study.cover.background }}
             >
               <Image
-                src={study.cover.src}
+                src={withBasePath(study.cover.src)}
                 alt={`${study.title} product preview`}
                 fill
                 sizes="(min-width: 768px) 424px, calc(100vw - 48px)"

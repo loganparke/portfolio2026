@@ -27,25 +27,30 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://loganparke.com"),
   title: {
-    default: "Logan Parke — Founder & Full-Stack Engineer",
+    default: "Logan Parke | Full-Stack Engineer & MarTech Leader",
     template: "%s | Logan Parke",
   },
   description:
-    "Full-stack engineer and two-time founder. I ship product end-to-end — React, TypeScript, Node.",
+    "Full-stack engineer and Head of MarTech building web systems, MarTech stacks, landing pages, and SaaS products across frontend, backend, and infrastructure.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Logan Parke — Founder & Full-Stack Engineer",
+    title: "Logan Parke | Full-Stack Engineer & MarTech Leader",
     description:
-      "Full-stack engineer and two-time founder. I ship product end-to-end — React, TypeScript, Node.",
+      "Full-stack engineer and Head of MarTech building web systems, MarTech stacks, landing pages, and SaaS products across frontend, backend, and infrastructure.",
     type: "website",
     locale: "en_US",
     url: "https://loganparke.com",
+    siteName: "Logan Parke",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Logan Parke — Founder & Full-Stack Engineer",
+    title: "Logan Parke | Full-Stack Engineer & MarTech Leader",
     description:
-      "Full-stack engineer and two-time founder. I ship product end-to-end — React, TypeScript, Node.",
+      "Full-stack engineer and Head of MarTech building web systems, MarTech stacks, landing pages, and SaaS products across frontend, backend, and infrastructure.",
   },
   robots: {
     index: true,
@@ -87,7 +92,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Logan Parke",
-              jobTitle: "Full-Stack Engineer & Founder",
+              jobTitle: "Full-Stack Engineer & Head of MarTech",
               url: "https://loganparke.com",
               sameAs: [
                 "https://www.linkedin.com/in/logan-parke/",
