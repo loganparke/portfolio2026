@@ -1,0 +1,48 @@
+---
+title: "Revmatics Retail Intelligence"
+subtitle: "Turning a data lake into actionable information based on retail and AI insights"
+role: "Lead Engineer, Innovation Team"
+dates: "2025 – present"
+stack: ["React", "TypeScript", "Tailwind", "Python", "Flask", "Claude API", "GPT API", "Heroku"]
+cover:
+  src: "/images/retail.png"
+  width: 3024
+  height: 1644
+order: 2
+---
+
+## Problem
+
+Revmatics had a data problem in reverse. We had granular live data on retail sales and inventory at the store-and-SKU level across major US retailers (Walmart, Kroger, Walgreens, others), plus the customer side: Shopify orders, landing-page conversions from our own page-builder product, Meta Ads, GA4. Customers had paid for that data. They couldn't use it.
+
+Before this product, the workflow was: pull the data into Excel, give it to the customer, hope they could read it. We hired a data analyst to do this manually. They couldn't scale across multiple brands. The result was a dataset we technically owned but couldn't sell, because we had no way to turn raw numbers into something a CMO or VP of Sales could act on Monday morning.
+
+## Role
+
+Lead engineer on the Innovation Team build. I owned hosting, integrations, application architecture, the entire frontend, the AI layer, and the prompt system. A data analyst contractor handled the data pipeline and JSON shape: getting the raw retail and ad data into a queryable form. Product direction came from the CRO, CMO, and CTO; engineering decisions were mine. Once we had paying customer interest I was on sales calls providing the technical demo while the sales team closed.
+
+## Approach
+
+The product is a dashboard with 40+ tabs of charts surfacing the cross-channel data: restock health, retailer velocity, DMA-level performance, ad spend efficiency, demographic correlation, pricing, and so on. The charts are the substrate. The AI sits on top.
+
+The pipeline runs like this: a user opens a tab. The frontend assembles two payloads. First, the rows specific to that tab (e.g. the restock list with store names, inventory counts, days-to-stockout estimates). Second, a cross-tab context summary (~800 tokens) extracting the top-three / bottom-three of every dimension on the rest of the dashboard. That goes to Claude Haiku 4.5. The model returns 2–3 sentences. The user sees it in a "Stream" panel and can give feedback or ask follow-up questions in chat.
+
+What makes the AI output usable instead of generic is a three-layer prompt architecture. A system preamble enforces "lead with insight, include root cause, close with action" on every request. Tab-specific prompts (40+ of them, written with retail domain knowledge) tell the model what the interesting signals are for each data type. Mandatory rules appended to every request ban the words that turn LLM output into mush: consider, may want to, might, notable, significant. Decisive language is required.
+
+Here's what an actual insight looks like:
+
+> "Feastables Dark Chocolate at Kroger in DMA 539 (Tampa) will hit zero inventory within 6 days at 47 units/week, costing about $140/week in lost revenue across 3 stores. Call the Kroger Division 43 rep today to expedite a restock PO before the weekend."
+
+That sentence drives a phone call.
+
+Hallucination defense is in the data assembly, not the model. The model can only cite numbers that exist in what we sent it; raw tables aren't in the payload, only the trimmed top-N per dimension. We don't post-validate output against input (that's a known fragility) but in practice the failure mode that matters most (made-up numbers) is structurally hard to hit because the model has no other numbers to invent from. For the structured Insights Dashboard cards we use Claude's JSON mode with a schema spelled out in the prompt: every card must have severity, category, headline, detail, tabIndex, tabLabel.
+
+The feedback loop is the one user-facing piece I'm proudest of. A thumbs-down on any insight surfaces specific reason chips: Too vague, Wrong data, Hedging language, Bad CTA, Not relevant. The chips are the failure modes, named explicitly. The data is collected for review, not yet used to fine-tune. But it tells us which way the model is failing in production, not just in our heads.
+
+## Outcome
+
+Ran from "let's try this" to working internal demo in one week. Iterated for about a month before showing it to customers. They wanted to buy it. Multiple Fortune-500 retail brands now using it as paying customers. The dashboard is the answer to the question "what do we sell on top of all this data" that Revmatics had been trying to answer with spreadsheets.
+
+## Stack
+
+React, TypeScript, Tailwind, Python, Flask, Claude Haiku 4.5 (prose insights), GPT-4o-mini (alternate path), JSON mode for structured cards, deployed on Heroku.

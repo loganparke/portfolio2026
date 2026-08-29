@@ -1,0 +1,47 @@
+---
+title: "Vacanze"
+subtitle: "A guest guide for vacation rentals"
+role: "Founder"
+dates: "2022 – 2026"
+stack: ["React", "Tailwind", "Node.js", "Express", "GraphQL", "MongoDB", "Redux", "Stripe", "Google Maps API", "Heroku"]
+cover:
+  src: "/images/vacanze.png"
+  width: 607
+  height: 807
+  background: "#102440"
+order: 5
+---
+
+## Problem
+
+Vacation rental hosts have to communicate a lot of information to every guest. The WiFi password, house rules, trash day, where the good coffee is, which beach is the locals' beach. Most hosts handle this with a printed binder, an email, or a stack of sticky notes by the door. None of those are easy to update, easy to share, or easy for the guest to use on their phone after check-in.
+
+I built Vacanze to fix that. My family owns a vacation rental and I'd stayed in plenty more, so the gap was personal.
+
+## Role
+
+Founder. Built the entire product solo. Frontend, backend, database, payments, hosting, domain, marketing site.
+
+## Approach
+
+Vacanze is a two-sided product. Hosts sign up, customize a guide for a specific property, and share it with each guest via a link or QR code. Guests open the link on their phone. No login required to view. Editing requires authentication and ownership of the property in the host's profile.
+
+The guide itself is built around three features. A Google Maps view where the host drops pins for places worth visiting, with custom pins that adjust based on category. A chat between host and guest. Info pages for everything the host wants to put on the digital binder.
+
+Two technical pieces took the most work. The Stripe integration was the hardest, because I needed a subscription model with tiered access (one property versus multiple properties on a larger plan), and the specific shape I wanted wasn't documented in Stripe's standard examples. I built it from their primitives. The PWA install behavior was the other one. Getting the splash screen, app icons, and install flow to behave correctly across iOS, Android, and desktop took weeks of trial and error.
+
+The Google Maps integration also got more involved than I expected. Hosts type addresses; the app geocodes them through Google's API and places custom pins on the map based on the category the host picked. Restaurant pins look different from beach pins.
+
+I built it with React, Tailwind, Node, GraphQL, MongoDB, and Redux for state, deployed on Heroku. Eight to ten months of focused work, then maintenance.
+
+## Outcome
+
+Three paying clients ran 15–20 vacation rentals on the platform at a few dollars a month each. The product covered its own hosting costs. I wound it down to focus on Revmatics and Mortar.
+
+## What I'd do differently
+
+The technical scope, not much. The thing I'd change is the business side. I built first and tried to find users second. If I started Vacanze today, I'd validate demand with conversations and a landing page before writing any code, then build the smallest version a host would pay for, then expand. The skills I've built since at Revmatics (sales calls, customer onboarding, demoing to clients) and at Mortar (working alongside two business co-founders) would have shaped how Vacanze went to market.
+
+## Stack
+
+React, Tailwind, Node.js, Express, GraphQL, MongoDB, Redux, Stripe, Google Maps API, Heroku, GoDaddy.

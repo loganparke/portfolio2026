@@ -1,0 +1,42 @@
+---
+title: "CRO Suite"
+subtitle: "Redesigning a proprietary platform in production"
+role: "Frontend Engineer"
+dates: "2025"
+stack: ["React", "TypeScript", "PHP", "JavaScript", "Figma"]
+cover:
+  src: "/images/cro.png"
+  width: 3024
+  height: 1646
+order: 3
+---
+
+## Problem
+
+Revmatics' CRO Suite is the platform customers use to build landing pages and run A/B tests. It had been acquired from another company. The page editor was a row of unlabelled icons that opened modals nested inside modals. Saving any change refreshed the whole page, scrolled the customer back to the top, and closed every menu they'd had open. The visual styling was black and white with basic CSS. The A/B test system lived in a separate area you couldn't reach from inside the page editor.
+
+Nobody asked us to redesign it. The product looked bad and the sales team didn't want to demo it.
+
+## Role
+
+Frontend engineer. I partnered with one designer. She owned the Figma work, I owned the implementation, and we decided scope together. The redesign extended Revmatics' existing brand design system into a tool that had never had one.
+
+## Approach
+
+CRO Suite's backend runs on a custom PHP framework that one engineer at the original company wrote from scratch. There was no documentation, no community, nothing to Google when something broke. Rebuilding it wasn't an option, so the redesign layered React and TypeScript onto what was already there.
+
+Three months of work total. About one month on the visual editor and the rest on supplementary surfaces, navigation, and the design system rollout.
+
+The page editor was the hardest piece. The full-page refresh wasn't about styling. It was how the framework moved data. Every save round-tripped through the server. The fix was to keep the framework where it was and put a local state layer in front of it. Customer edits update the live DOM optimistically. The change fires off to the PHP backend. On success the UI shows saved; on failure it surfaces "unsaved changes" without throwing the user back to the top of the page.
+
+The visual side was a side-panel-and-canvas layout. Customers edit in a panel; changes appear on the page in real time; save commits. The unlabelled icons came out. Editor controls got real labels and consistent affordances. Roughly 15–20 components from the design system got pulled into the product, replacing the black-and-white originals. We didn't touch the underlying data model or backend logic.
+
+Multi-user collaborative editing was out of scope.
+
+## Outcome
+
+Shipped. Now part of the core product, used actively by customers. The design system rollout became the way other Revmatics products got reskinned later.
+
+## Stack
+
+React, TypeScript, PHP (proprietary framework), JavaScript, the Revmatics brand design system, Figma.
