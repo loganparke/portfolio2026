@@ -1,0 +1,40 @@
+---
+title: "MortarStack"
+subtitle: "Property management software for mid-sized commercial buildings"
+role: "Co-founder & CTO"
+dates: "2026 – present"
+stack: ["React", "TypeScript", "Node.js", "Stripe", "MongoDB", "Express", "GraphQL", "Tailwind"]
+cover:
+  src: "/images/mortar.png"
+  width: 3024
+  height: 1528
+order: 1
+---
+
+## Problem
+
+Property managers with five to 15 commercial buildings often use separate tools for tenants, maintenance, and short-term space rentals. Enterprise software is expensive and more complicated than they need, while smaller property-management tools do not handle commercial buildings well. MortarStack puts those workflows in one place.
+
+## Role
+
+I am the co-founder and CTO. I handle the product, architecture, deployment, and day-to-day technical roadmap. My co-founders focus on sales, marketing, and the business side. I build the core parts of the product and manage contractors when we need extra development help.
+
+## Approach
+
+The main technical challenge is that users do not always belong to one building. A property manager can manage several properties, a tenant can rent space in more than one building, and a vendor can work across properties with different owners. Building admins, tenants, and vendors also need different access to the system.
+
+The application uses MongoDB. A BuildingMembership collection connects each user to a building and stores their role and permissions for that property. Records such as spaces, bookings, and work orders include a building ID, with compound indexes for the queries used most often.
+
+Vendors use a separate set of relationships: User, VendorMember, Vendor, and BuildingVendor. My first version tied a vendor account to one building. While testing each user type before beta, I realized that a vendor working across five buildings would need five accounts. I changed it to a many-to-many relationship so one vendor can work across buildings while keeping details such as preferred status and service scope specific to each property.
+
+I also simplified the role system. The first version had six roles for owners, property managers, tenant employees, and other variations. That duplicated information already stored in permissions. I reduced it to three roles: building admin, building tenant, and vendor. The permissions determine what each person can do within a building.
+
+Messaging checks for new activity every 60 seconds instead of using WebSockets. That is responsive enough for the current product and simpler to operate at this stage. The beta sends notifications in the app and by email. The architecture can support SMS and WhatsApp later if customers ask for them.
+
+## Outcome
+
+MortarStack currently supports tenant management, space bookings, and work orders, with Stripe payments integrated. The first pilot customer manages five buildings and primarily uses the booking and tenant features. Their feedback has led to smaller improvements, but the data model has not needed another major rebuild since the vendor refactor.
+
+## Stack
+
+MongoDB, Node.js, Express, GraphQL, React, TypeScript, Tailwind, Stripe, deployed on Render with Cloudflare for DNS and CDN.

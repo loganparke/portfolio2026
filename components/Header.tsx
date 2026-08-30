@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 
 const sectionLinks = [
+  { id: "current-role", label: "Current Role" },
   { id: "selected-work", label: "Website Work" },
   { id: "landing-pages", label: "Landing Pages" },
   { id: "products", label: "Products" },
@@ -13,6 +15,7 @@ const sectionLinks = [
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,28 +23,55 @@ export function Header() {
       .map(({ id }) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
 
-    if (sections.length === 0) return;
+    if (sections.length === 0) {
+      setActiveSection(null);
+      return;
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSection = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              Math.abs(a.boundingClientRect.top) -
-              Math.abs(b.boundingClientRect.top),
-          )[0];
+    let animationFrame: number | null = null;
 
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id);
+    const updateActiveSection = () => {
+      animationFrame = null;
+      const headerHeight =
+        document.querySelector("header")?.getBoundingClientRect().height ?? 80;
+      const activationPoint = headerHeight + 24;
+      let nextSection: string | null = null;
+
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= activationPoint) {
+          nextSection = section.id;
         }
-      },
-      { rootMargin: "-20% 0px -65% 0px" },
-    );
+      });
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+      const pageBottom =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 2;
+
+      if (pageBottom) {
+        nextSection = sections[sections.length - 1].id;
+      }
+
+      setActiveSection(nextSection);
+    };
+
+    const scheduleUpdate = () => {
+      if (animationFrame === null) {
+        animationFrame = window.requestAnimationFrame(updateActiveSection);
+      }
+    };
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [pathname]);
 
   const navigation = sectionLinks.map(({ id, label }) => {
     const isActive = activeSection === id;
@@ -50,6 +80,7 @@ export function Header() {
       <Link
         key={id}
         href={`/#${id}`}
+        onClick={() => setActiveSection(id)}
         aria-current={isActive ? "location" : undefined}
         className={`whitespace-nowrap rounded-full px-3 py-1.5 text-small transition-all duration-200 ${
           isActive

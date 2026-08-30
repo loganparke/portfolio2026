@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { Profile } from "@/components/Profile";
+import { CurrentRole } from "@/components/CurrentRole";
 import { SelectedWorkCard } from "@/components/SelectedWorkCard";
 import { PageExampleCard } from "@/components/PageExampleCard";
 import { CaseStudyCard } from "@/components/CaseStudyCard";
@@ -90,7 +91,7 @@ const pageExamples = [
 ];
 
 const productSlugs = new Set([
-  "spacedirect",
+  "mortarstack",
   "revmatics-analytics",
   "cro-suite",
   "vacanze",
@@ -105,6 +106,7 @@ export default function Home() {
     <main>
       <Hero />
       <Profile />
+      <CurrentRole />
 
       <section
         id="selected-work"
