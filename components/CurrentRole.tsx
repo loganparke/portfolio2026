@@ -7,7 +7,7 @@ const areas = [
   },
   {
     title: "Analytics",
-    description: "GA4, Google Tag Manager, Meta Ads, and reporting.",
+    description: "GA4, Google Tag Manager, and reporting.",
   },
   {
     title: "CRO",
@@ -23,7 +23,7 @@ export function CurrentRole() {
   return (
     <section
       id="current-role"
-      className="scroll-mt-28 pb-subsection-mobile md:scroll-mt-24 md:pb-subsection"
+      className="scroll-mt-40 pb-subsection-mobile md:scroll-mt-24 md:pb-subsection"
     >
       <div className="mx-auto max-w-case-study px-6 md:px-container-pad">
         <h2 className="mb-8 font-display text-h2-mobile text-ink md:mb-12 md:text-h2">

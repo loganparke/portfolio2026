@@ -82,7 +82,7 @@ export function Header() {
         href={`/#${id}`}
         onClick={() => setActiveSection(id)}
         aria-current={isActive ? "location" : undefined}
-        className={`whitespace-nowrap rounded-full px-3 py-1.5 text-small transition-all duration-200 ${
+        className={`flex-none whitespace-nowrap rounded-full px-3 py-1.5 text-small transition-all duration-200 ${
           isActive
             ? "bg-ink text-paper shadow-sm"
             : "text-muted hover:bg-hairline hover:text-ink"
@@ -153,7 +153,7 @@ export function Header() {
       <div className="mx-auto max-w-case-study px-6 pb-3 md:hidden">
         <nav
           aria-label="Portfolio sections"
-          className="flex gap-1 overflow-x-auto rounded-full border border-hairline bg-paper p-1 shadow-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex w-full flex-wrap justify-center gap-1 rounded-card border border-hairline bg-paper p-1 shadow-sm"
         >
           {navigation}
         </nav>
