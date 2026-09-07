@@ -34,7 +34,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="scroll-mt-40 py-subsection-mobile md:scroll-mt-24 md:py-subsection"
+      className="scroll-mt-24 py-subsection-mobile md:py-subsection"
     >
       <div className="mx-auto max-w-case-study px-6 md:px-container-pad">
         <h2 className="font-display text-h2-mobile md:text-h2 text-ink mb-8 md:mb-12">
