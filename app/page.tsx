@@ -49,6 +49,22 @@ const pageExamples = [
     },
   },
   {
+    title: "Bibigo landing page",
+    image: {
+      src: "/images/bibgo.png",
+      width: 3024,
+      height: 1644,
+    },
+  },
+  {
+    title: "Vodafone landing page",
+    image: {
+      src: "/images/voda.png",
+      width: 3024,
+      height: 1646,
+    },
+  },
+  {
     title: "Tranquila homepage",
     image: {
       src: "/images/tranquila.png",
